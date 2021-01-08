@@ -27,18 +27,22 @@ const BookSearch = ({ myBooks, setMyBooks }: IProps) => {
     const [allAvailableBooks, setAllAvailableBooks] = useState([]);
 
     const requestBooks = async () => {
-      if (bookTypeToSearch) {
+      if (bookTypeToSearch === "") {
+        setAllAvailableBooks([]);
+      } else if (bookTypeToSearch) {
         const allBooks = await getBooksByType(bookTypeToSearch);
         setAllAvailableBooks(allBooks.items);
       }
     }
 
     useEffect(() => {
-        const getAllBooks = async () => {
-            await requestBooks();
-        }
-        getAllBooks();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+      // 500ms delay to keep from spamming the API
+      const delay = setTimeout( async () => {
+        await requestBooks();
+      }, 500)
+      
+      return () => clearTimeout(delay)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [bookTypeToSearch]);
 
     // Add a book to the wishlist
@@ -68,7 +72,10 @@ const BookSearch = ({ myBooks, setMyBooks }: IProps) => {
                       type="search"
                       value={bookType}
                       placeholder="Search for books to add to your reading list and press Enter"
-                      onChange={(e) => updateBookType(e.target.value)}
+                      onChange={(e) => {
+                        updateBookType(e.target.value);
+                        updateBookTypeToSearch(e.target.value);
+                      }}
                     />
                   </form>
                   {(!bookType) && (
@@ -86,7 +93,7 @@ const BookSearch = ({ myBooks, setMyBooks }: IProps) => {
           </div>
         </div>
 
-        {(allAvailableBooks.length > 0) && allAvailableBooks.map((book: Book, index) => 
+        {(allAvailableBooks?.length > 0) && allAvailableBooks.map((book: Book, index) => 
           <article key={index} className="book--card">
             <img src={book.volumeInfo.imageLinks.thumbnail} alt={''} className="book--cover" />
             <div className="book--info">
