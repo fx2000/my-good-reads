@@ -44,7 +44,7 @@ a {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: $blue-accent;
+  background: radial-gradient(ellipse at bottom, #5091dd 0%, #030617 150%);
   color: $white;
   padding: $spacing-3xs $spacing-med;
   box-shadow: 0 2px 6px hsla(0, 0%, 0%, 0.2);
@@ -236,31 +236,47 @@ form {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  position: fixed;
-  right: $spacing-sm;
   width: 400px;
+
+  margin-left: $spacing-sm;
+
+  @media (max-width: 1000px) {
+    margin-left: unset;
+    width: 100%;
+  }
+}
+.layout--sidebar--title {
+  position: fixed;
+  height: 47px;
+  right: $spacing-sm;
   padding: 0 $spacing-sm $spacing-sm $spacing-sm;
   border-radius: 6px;
   box-shadow: 0 2px 6px hsla(0, 0%, 0%, 0.2);
   background-color: #fdfbfb;
-  margin-left: $spacing-sm;
-  height: 80vh;
+  padding-top: $spacing-xxs;
+
+  h3 {
+    white-space: nowrap;
+    margin: 0;
+  }
 
   @media (max-width: 1000px) {
+    right: unset;
     position: unset;
-    width: 100%;
-    height: unset;
-    min-height: 150px;
-    margin-left: unset;
     margin-bottom: $spacing-sm;
   }
-}
-.layout--sidebar--title {
-  white-space: nowrap;
 }
 .layout--sidebar--content {
   display: flex;
   flex-direction: column;
+  position: fixed;
+  height: 70vh;
+  right: $spacing-sm;
+  top: 215px;
+  padding: $spacing-sm;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px hsla(0, 0%, 0%, 0.2);
+  background-color: #fdfbfb;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: grey;
@@ -275,5 +291,17 @@ form {
     background-color: grey;
     border-radius: 20px;
     border: 2px solid grey;
+  }
+  @media (max-width: 1000px) {
+    position: unset;
+    right: unset;
+    width: 100%;
+    height: unset;
+    min-height: 150px;
+    margin-left: unset;
+    margin-bottom: $spacing-sm;
+  }
+  p {
+    font-weight: 500;
   }
 }
