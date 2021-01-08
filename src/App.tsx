@@ -16,10 +16,10 @@ function App() {
         </div>
       </header>
       <main className="layout">
-        <section className="layout--main">
+        <section className="layout--main" data-testid="book-search-component">
           <BookSearch myBooks={myBooks} setMyBooks={setMyBooks} />
         </section>
-        <aside className="layout--sidebar">
+        <aside className="layout--sidebar" data-testid="sidebar-component">
           <Sidebar myBooks={myBooks} setMyBooks={setMyBooks} />
         </aside>
       </main>

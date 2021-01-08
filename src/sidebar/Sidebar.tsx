@@ -34,7 +34,7 @@ const Sidebar = ({ myBooks, setMyBooks }: IProps) => {
       <h3 className="layout--sidebar--title">
         {`My Reading Wishlist (${myBooks?.length})`}
       </h3>
-      <div className="layout--sidebar--content">
+      <div className="layout--sidebar--content" data-testid="sidebar-content">
         {(myBooks?.length > 0) && myBooks?.map((book: Book, index: any) =>
           <div key={index} className="book--favorite">
             <p>{book.volumeInfo?.title}</p>

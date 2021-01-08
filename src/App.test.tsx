@@ -6,12 +6,22 @@ import Adapter from "enzyme-adapter-react-16";
 
 configure({ adapter: new Adapter() });
 
-it("renders without crashing", () => {
+it("Renders without crashing", () => {
   shallow(<App />);
 });
 
-it("renders page title", () => {
-  const wrapper = shallow(<App />);
-  const title = <h1>My Good Reads</h1>;
-  expect(wrapper.contains(title)).toEqual(true);
+it("Renders page title", () => {
+  const { getByText } = render(<App />);
+  const linkElement = getByText("My Good Reads");
+  expect(linkElement).toBeInTheDocument();
+});
+
+it("Has book-search-component", () => {
+  const { getByTestId } = render(<App />);
+  expect( getByTestId("book-search-component") ).toBeDefined();
+});
+
+it("Has sidebar-component", () => {
+  const { getByTestId } = render(<App />);
+  expect( getByTestId("sidebar-component") ).toBeDefined();
 });
