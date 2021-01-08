@@ -153,6 +153,9 @@ form {
     font-weight: 700;
   }
 
+  svg {
+    min-width: 32px;
+  }
   svg:hover {
     cursor: pointer;
   }
@@ -169,10 +172,10 @@ form {
 }
 .book--description {
   max-height: 120px;
+  padding-right: $spacing-xxs;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: grey;
-  padding-right: $spacing-xxs;
   &::-webkit-scrollbar {
     width: 4px;
   }
@@ -184,6 +187,23 @@ form {
     background-color: grey;
     border-radius: 20px;
     border: 2px solid grey;
+  }
+}
+.book--favorite {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: $spacing-xs;
+
+  p {
+    margin: 0;
+  }
+
+  svg {
+    min-width: 16px;
+  }
+  svg:hover {
+    cursor: pointer;
   }
 }
 
@@ -206,20 +226,36 @@ form {
 .layout--main {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: calc(100% - 400px);
 }
 .layout--sidebar {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  width: 30%;
+  position: fixed;
+  right: $spacing-sm;
+  width: 400px;
   padding: 0 $spacing-sm;
   border-radius: 6px;
   box-shadow: 0 2px 6px hsla(0, 0%, 0%, 0.2);
   background-color: #fdfbfb;
   margin-left: $spacing-sm;
-  min-height: 80vh;
-  overflow: hidden;
+  height: 80vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: grey;
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: lightgrey;
+    border-radius: 3px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: grey;
+    border-radius: 20px;
+    border: 2px solid grey;
+  }
 
   @media (max-width: 1000px) {
     width: 100%;

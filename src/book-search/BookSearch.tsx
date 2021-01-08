@@ -2,14 +2,29 @@ import React, { useEffect, useState } from "react";
 import { getBooksByType } from "./book-search.service";
 import { ReactComponent as PlusIcon } from '../assets/plusIcon.svg';
 
+interface Book {
+  id: string;
+  volumeInfo: {
+    title: string;
+    authors: string[];
+    publishedDate?: string;
+    publisher?: string;
+    description?: string;
+    imageLinks: {
+      thumbnail: string;
+    }
+  }
+};
 
-const BookSearch = () => {
+interface IProps {
+  myBooks?: any;
+  setMyBooks?: any;
+};
+
+const BookSearch = ({ myBooks, setMyBooks }: IProps) => {
     const [bookType, updateBookType] = useState("");
     const [bookTypeToSearch, updateBookTypeToSearch] = useState("");
     const [allAvailableBooks, setAllAvailableBooks] = useState([]);
-    const [myBooks, setMyBooks] = useState([]);
-
-    console.log(allAvailableBooks)
 
     const requestBooks = async () => {
       if (bookTypeToSearch) {
@@ -26,28 +41,13 @@ const BookSearch = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [bookTypeToSearch]);
 
+    // Add a book to the wishlist
     const addToList = (book: Book) => {
       const array : any[] = [...myBooks];
-
       array.push(book);
-      const uniqueArray = Array.from(new Set(array)) 
-      
-      console.log(uniqueArray)
+      const uniqueArray = Array.from(new Set(array)) ;
+      setMyBooks(uniqueArray);
     }
-
-    interface Book {
-      id: string;
-      volumeInfo: {
-        title: string;
-        authors: string[];
-        publishedDate?: string;
-        publisher?: string;
-        description?: string;
-        imageLinks: {
-          thumbnail: string;
-        }
-      }
-    };
 
     return (
       <>
@@ -58,7 +58,7 @@ const BookSearch = () => {
                       onSubmit={(e) => {
                           debugger;
                           e.preventDefault();
-                          updateBookTypeToSearch(bookType)
+                          updateBookTypeToSearch(bookType);
                       }}
                   >
                     <input
@@ -75,7 +75,7 @@ const BookSearch = () => {
                     <div className="empty">
                       <p>
                         Try searching for a topic, for example
-                        <a onClick={() => updateBookType("Javascript")}>
+                        <a href="/#" onClick={() => updateBookType("Javascript")}>
                           {" "}
                           "Javascript"
                         </a>

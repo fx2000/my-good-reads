@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './styles/App.scss';
 import BookSearch from './book-search/BookSearch';
+import Sidebar from './sidebar/Sidebar';
+
+
 
 function App() {
+  const [myBooks, setMyBooks] = useState([]);
+
   return (
     <div>
       <header className="header">
@@ -12,10 +17,10 @@ function App() {
       </header>
       <main className="layout">
         <section className="layout--main">
-          <BookSearch />
+          <BookSearch myBooks={myBooks} setMyBooks={setMyBooks} />
         </section>
         <aside className="layout--sidebar">
-          <h3>My Reading Wishlist ()</h3>
+          <Sidebar myBooks={myBooks} setMyBooks={setMyBooks} />
         </aside>
       </main>
     </div>
