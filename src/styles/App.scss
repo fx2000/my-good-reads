@@ -193,7 +193,7 @@ form {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: $spacing-xs;
+  margin: 0 $spacing-xs $spacing-xs 0;
 
   p {
     margin: 0;
@@ -227,6 +227,10 @@ form {
   display: flex;
   flex-direction: column;
   width: calc(100% - 400px);
+
+  @media (max-width: 1000px) {
+    width: 100%;
+  }
 }
 .layout--sidebar {
   flex-grow: 1;
@@ -235,12 +239,28 @@ form {
   position: fixed;
   right: $spacing-sm;
   width: 400px;
-  padding: 0 $spacing-sm;
+  padding: 0 $spacing-sm $spacing-sm $spacing-sm;
   border-radius: 6px;
   box-shadow: 0 2px 6px hsla(0, 0%, 0%, 0.2);
   background-color: #fdfbfb;
   margin-left: $spacing-sm;
   height: 80vh;
+
+  @media (max-width: 1000px) {
+    position: unset;
+    width: 100%;
+    height: unset;
+    min-height: 150px;
+    margin-left: unset;
+    margin-bottom: $spacing-sm;
+  }
+}
+.layout--sidebar--title {
+  white-space: nowrap;
+}
+.layout--sidebar--content {
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: grey;
@@ -256,14 +276,4 @@ form {
     border-radius: 20px;
     border: 2px solid grey;
   }
-
-  @media (max-width: 1000px) {
-    width: 100%;
-    min-height: 150px;
-    margin-left: unset;
-    margin-bottom: $spacing-sm;
-  }
-}
-.layout--sidebar--title {
-  white-space: nowrap;
 }
